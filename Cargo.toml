@@ -1,0 +1,50 @@
+[package]
+name = "locknote"
+version = "0.1.0"
+edition = "2024"
+authors = ["Blessing Samuel <dicethedev@gmail.com>"]
+description = "🔐 A secure encrypted note manager built in Rust using Argon2 + AES-GCM + Tokio."
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/dicethedev/LockNote"
+
+[dependencies]
+# --- Core async + JSON handling ---
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# --- CLI ---
+clap = { version = "4", features = ["derive"] }
+rpassword = "7.0"
+
+# --- Crypto ---
+base64 = "0.21"
+aes-gcm = "0.10"
+rand = "0.8"
+argon2 = "0.4" 
+
+# --- Error handling helpers ---
+anyhow = "1"
+
+# --- UUIDs for note IDs ---
+uuid = { version = "1", features = ["v4"] }
+zeroize = "1.5"
+
+
+hex = "0.4.3"
+tempfile = "3.23.0"
+
+[dev-dependencies]
+# For CLI testing
+assert_cmd = "2.0.17"
+predicates = "3"
+
+[profile.release]
+# --- Setting the Optimization level for the compiler (LLVM) ---
+opt-level = 3
+# --- Link Time Optimization ---
+lto = true 
+# --- Controls how many codegen unit rust splits the crate into ---
+codegen-units = 1
+strip = true
