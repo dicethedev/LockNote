@@ -7,11 +7,21 @@ It uses **Argon2 password hashing** and **AES-GCM encryption** to safely store y
 
 ## 🚀 Features
 
-- 🧠 Password-based encryption using Argon2 + AES-GCM  
+- 🧠 Password-based encryption using Argon2 + AES-GCM 
+- 🔒 AES-256 encryption for every note  
 - 📝 Create, list, view, and delete encrypted notes  
 - 🔍 Full-text search across notes (decrypted in-memory only)  
 - ⚡ Asynchronous file operations via Tokio  
-- 💾 Stored in a simple JSON lockfile  
+- 💾 Stored in a simple JSON lockfile and locally in your home directory (`~/.locknote.json`) 
+
+---
+
+## Built With
+- [Rust](https://www.rust-lang.org/)
+- [AES-GCM](https://crates.io/crates/aes-gcm)
+- [Argon2](https://crates.io/crates/argon2)
+- [Serde](https://crates.io/crates/serde)
+- [assert_cmd](https://crates.io/crates/assert_cmd)
 
 ---
 
@@ -68,9 +78,7 @@ Finds all notes containing the keyword in decrypted text.
 ## 🔒 Security Model
 
 - Each lockfile is encrypted using `AES-GCM` with a key derived from your password via `Argon2`.
-
 - Notes are decrypted only in memory during viewing/searching.
-
 - `JSON` structure makes backups and portability simple.
 
 ## Running Tests
@@ -90,6 +98,15 @@ locknote view 123e4567-e89b-12d3-a456-426614174000
 locknote delete 123e4567-e89b-12d3-a456-426614174000
 locknote search password
 ```
+or 
+
+```bash
+locknote init          # Initialize a secure note store
+locknote add "My note" # Add a note
+locknote list          # List all notes
+locknote view 1        # View a note
+locknote delete 1      # Delete a note
+```
 
 ## Distribution
 
@@ -98,6 +115,14 @@ You can copy the built binary anywhere and use it standalone
 ```bash
 cp target/release/locknote/usr/local/bin
 ```
+
+## Future Improvements
+
+- Password-based encryption for each session
+- Configurable note directories
+- Cross-platform desktop version
+
+
 ### Author
 
 Author
